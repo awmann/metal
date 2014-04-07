@@ -6,7 +6,11 @@
 ;        spectrum. Uses the empirical formula described in Mann et
 ;        al. (2013 AJ 145 52). This assumes that you have
 ;        already put the spectrum in vacuum and the rest frame of the
-;        star (correcting for RV variations). 
+;        star (correcting for RV variations). You can find some code
+;        to help do this in https://github.com/awmann/RV_code
+;        I suggest using the same template star as me for consistency
+;        when doing RV corrections: HD36395.fits. This is also
+;        available with the RV code.
 ;        Assumes you have measured the Spectral Type via some other
 ;        method (I'll post something to do this eventually).
 ;
@@ -48,8 +52,7 @@
 ;   
 ; EXAMPLES:
 ;
-;       Download the example from
-;       ifa.hawaii.edu~/amann/programs/sample.fits
+;       Download the example included here.
 ;       temp = mrdfits('sample.fits',0)
 ;       lambda = temp[*,0] 
 ;       spec = temp[*,1]
@@ -113,6 +116,7 @@
 ;       Added more comments. A. Mann 07/01/2013
 ;       Added calibration errors to comments. A. Mann 10/01/2013
 ;       Reorganization for better GitHub use A. Mann 02/05/2014
+;       Changed to reflect RV code A. Mann 04/07/2014
 ;-
 
 
