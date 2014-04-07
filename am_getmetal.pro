@@ -52,7 +52,7 @@
 ;   
 ; EXAMPLES:
 ;
-;       Download the example included here.
+;       Download the example sample.fits
 ;       temp = mrdfits('sample.fits',0)
 ;       lambda = temp[*,0] 
 ;       spec = temp[*,1]

@@ -20,6 +20,9 @@
 ; Giving Credit:
 ;        If you make use of this code please cite Mann et al. (2014):
 ;        http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:1403.5560
+;        If you use the IRTF templates for RV correction make sure to
+;        cite Cushing et al. (2005) and Rayner et al. (2009).
+;
 ;
 ; CALLING SEQUENCE: 
 ;       AM_GETMETAL_LATE,lambda,spec,error,feh,feh_err,doerr=doerr
@@ -33,7 +36,7 @@
 ;
 ; OUTPUT PARAMETERS: 
 ;       feh      [Fe/H]
-;       feh_err  error in [Fe/H], -1 if error spetrum not provided
+;       feh_err  error in [Fe/H], -99 if error spetrum not provided
 ;                (only based on SNR, does not include errors in calibration)
 ;
 ; OPTIONAL INPUT KEYWORD PARAMETERS:
@@ -70,7 +73,7 @@
 ;       -Reported errors ignore errors in the calibration itself. You
 ;       should add in a ~0.07 dex systematic calibration error
 ;       -This technique is untested for stars more metal-poor than
-;       [Fe/H]=-0.65 or more rich than [Fe/H]=+0.5. Output outside
+;       [Fe/H]=-0.60 or more rich than [Fe/H]=+0.5. Output outside
 ;       this range results should be treated with skepticism.
 ;
 ;
@@ -82,6 +85,7 @@
 ;       Routine written. A. Mann 11/18/2013
 ;       Squished bugs and added comments. A. Mann 01/20/2014
 ;       Formatted for GitHub 02/05/2014
+;       Updated for publication 03/16/2014
 ;       
 ;-
 
@@ -154,7 +158,11 @@ PRO geth20k2,newspec,lambda,h20
 END
 
 PRO shrink, array
+<<<<<<< HEAD
  if n_elements(array) gt 1 then array=array[1:n_elements(array)-1]
+=======
+  if n_elements(array) gt 1 then array=array[1:n_elements(array)-1]
+>>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
 END
 
 ;; This program just holds all my favorite continuum regions.
@@ -194,13 +202,18 @@ PRO am_getmetal_late,lambda,spec,error,feh,feh_err,doerr=doerr
 
   ;; just some error handling and variable initialization
   if n_params() lt 4 then begin
+<<<<<<< HEAD
      print,'Syntax -  GETMETAL,lambda,spectrum,sptnum,band,feh,feh_err,mh,mh_err,error=error'
+=======
+     print,'Syntax -  GETMETAL,lambda,spec,error,feh,feh_err,doerr=doerr'
+>>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
      return
   endif
   if (n_elements(lambda) ne n_elements(spec)) or (n_elements(spec) ne n_elements(error)) then begin
      print,'wavelength, spectrum, and error (if provided) arrays must have the same number of elements'
      feh = -99
      feh_err = -99
+<<<<<<< HEAD
      stop
      return
   endif
@@ -209,6 +222,17 @@ PRO am_getmetal_late,lambda,spec,error,feh,feh_err,doerr=doerr
   Widths = [0.0068, 0.0059]                                          ;; in microns
   coeffs = [0.13116341, 0.21012097, -3.0679554, 1.3409050]           ;; Coefficients with full digits
   ;;coeffs = [0.131, 0.210, -3.07, 1.341]           ;; Coefficients from the paper (less sig figs but gives same standard deviation and r^2_ap)
+=======
+     return
+  endif
+  if n_elements(doerr) gt 1 or n_elements(doerr) eq 0 then doerr = 1 ;; default, do error analysis
+  Centers = [2.2079, 2.264]                                          ;; Na, Ca
+  Widths = [0.0068, 0.0059]                                          ;; in microns
+  coeffs = [0.13116341, 0.21012097, -3.0679554, 1.3409050]           ;; Coefficients with all digits (not actually required)
+  ;;coeffs = [0.131, 0.210, -3.07, 1.341] ;; Coefficients from the
+  ;;paper (less sig figs but gives same standard deviation and
+  ;;r^2_ap). Leave for testing!
+>>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
   featurenum = 2                                   ;; 2 Features (Na and Ca), this is included to keep the program generic
   
   geth20k2,spec,lambda,Te                                             ;; H2O-K2 from Rojas-Ayala et al. (2012)
