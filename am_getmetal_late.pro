@@ -159,11 +159,7 @@ PRO geth20k2,newspec,lambda,h20
 END
 
 PRO shrink, array
-<<<<<<< HEAD
- if n_elements(array) gt 1 then array=array[1:n_elements(array)-1]
-=======
   if n_elements(array) gt 1 then array=array[1:n_elements(array)-1]
->>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
 END
 
 ;; This program just holds all my favorite continuum regions.
@@ -203,18 +199,13 @@ PRO am_getmetal_late,lambda,spec,error,feh,feh_err,doerr=doerr
 
   ;; just some error handling and variable initialization
   if n_params() lt 4 then begin
-<<<<<<< HEAD
-     print,'Syntax -  GETMETAL,lambda,spectrum,sptnum,band,feh,feh_err,mh,mh_err,error=error'
-=======
      print,'Syntax -  GETMETAL,lambda,spec,error,feh,feh_err,doerr=doerr'
->>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
      return
   endif
   if (n_elements(lambda) ne n_elements(spec)) or (n_elements(spec) ne n_elements(error)) then begin
      print,'wavelength, spectrum, and error (if provided) arrays must have the same number of elements'
      feh = -99
      feh_err = -99
-<<<<<<< HEAD
      stop
      return
   endif
@@ -223,9 +214,6 @@ PRO am_getmetal_late,lambda,spec,error,feh,feh_err,doerr=doerr
   Widths = [0.0068, 0.0059]                                          ;; in microns
   coeffs = [0.13116341, 0.21012097, -3.0679554, 1.3409050]           ;; Coefficients with full digits
   ;;coeffs = [0.131, 0.210, -3.07, 1.341]           ;; Coefficients from the paper (less sig figs but gives same standard deviation and r^2_ap)
-=======
-     return
-  endif
   if n_elements(doerr) gt 1 or n_elements(doerr) eq 0 then doerr = 1 ;; default, do error analysis
   Centers = [2.2079, 2.264]                                          ;; Na, Ca
   Widths = [0.0068, 0.0059]                                          ;; in microns
@@ -233,7 +221,6 @@ PRO am_getmetal_late,lambda,spec,error,feh,feh_err,doerr=doerr
   ;;coeffs = [0.131, 0.210, -3.07, 1.341] ;; Coefficients from the
   ;;paper (less sig figs but gives same standard deviation and
   ;;r^2_ap). Leave for testing!
->>>>>>> 705d7d2cde1c21b04f14690398fc2f24131ed733
   featurenum = 2                                   ;; 2 Features (Na and Ca), this is included to keep the program generic
   
   geth20k2,spec,lambda,Te                                             ;; H2O-K2 from Rojas-Ayala et al. (2012)

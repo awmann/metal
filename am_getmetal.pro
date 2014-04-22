@@ -282,6 +282,9 @@ PRO am_getmetal,lambda,spec,error,sptnum,band,feh,feh_err,mh,mh_err,doerr=doerr
   endif
   if n_elements(doerr) gt 1 or n_elements(doerr) eq 0 then doerr = 1 ;; default, do error analysis
 
+
+  ;; Note, this calibration has been updated slightly since the paper
+  ;; was published
   case band of
      'Vis': begin
         band_index,lambda,spec,.8950,.01,.74,.01,Te ;; calculate the Color-1 index
@@ -289,28 +292,28 @@ PRO am_getmetal,lambda,spec,error,sptnum,band,feh,feh_err,mh,mh_err,doerr=doerr
            ;; [Fe/H]
            Centers = [0.8208, 0.4648, 0.5608]    
            Widths = [0.0035, 0.0023, 0.0020]   
-           coeffs = [0.53,0.26,-0.16,-0.784,-0.34] ;; Feature 7, 1, 2
+           coeffs = [0.5361,0.2381,-0.1565,-0.7298,-0.3696] ;; Feature 7, 1, 2
            featurenum = 3
            metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,feh
 
            ;; [M/H]
            Centers = [0.8208, 0.4648, 0.8684]      
            Widths = [0.0035, 0.0023, 0.0026]              
-           coeffs = [0.38,0.21,0.29,-0.504,-0.79] ;; Feature 7, 1, 8
+           coeffs = [0.3862,0.2109,0.2861,-0.4113,-0.8737] ;; Feature 7, 1, 8
            featurenum = 3
            metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,mh
         endif else begin
            ;; [Fe/H]
            Centers = [0.6416, 0.8684, 0.8208, 0.6118]      
            Widths = [0.0041, 0.0026, 0.0035, 0.0020]        
-           coeffs = [-0.20,0.48,0.24,0.14,-0.204,-0.32] ;; Feature 5, 8, 7, 3
+           coeffs = [-0.1989,0.4464,0.2606,0.1381,-0.3559,-0.1584] ;; Feature 5, 8, 7, 3
            featurenum = 4
            metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,feh
 
            ;; [M/H]
            Centers = [0.6416, 0.6232, 0.7540]      
            Widths = [0.0041, 0.0020, 0.0020]       
-           coeffs = [-0.065,-0.071,-0.3,0.719,-0.24] ;; Feature 5, 4, 6
+           coeffs = [-0.0638,-0.0593,-0.3286,0.6080,-0.2633] ;; Feature 5, 4, 6
            featurenum = 3
            metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,mh
         endelse
@@ -320,14 +323,14 @@ PRO am_getmetal,lambda,spec,error,sptnum,band,feh,feh_err,mh,mh_err,doerr=doerr
         ;; [Fe/H]
         Centers = [1.2698, 1.1396, 1.3148, 1.3344]       
         Widths = [0.0098, 0.0026, 0.0050, 0.0023]    
-        coeffs = [0.29, 0.21, 0.26, -0.26, -0.190, -1.03] ;; Feature 10, 9, 12, 13
+        coeffs = [0.2860, 0.1929, 0.2161, -0.2667, 0.2613, -1.3406] ;; Feature 10, 9, 12, 13
         featurenum = 4
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,feh
 
         ;; [M/H]
         Centers = [1.2698, 1.2908, 1.1396]       
         Widths = [0.0098, 0.0020, 0.0026]    
-        coeffs = [0.32, 0.46, 0.076, 1.213, -1.97] ;; Feature 10, 11, 9
+        coeffs = [0.3372, 0.2864, 0.0858, 1.8709, -2.6129] ;; Feature 10, 11, 9
         featurenum = 3
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,mh
      end
@@ -336,14 +339,14 @@ PRO am_getmetal,lambda,spec,error,sptnum,band,feh,feh_err,mh,mh_err,doerr=doerr
         ;; [Fe/H]
         Centers = [1.6158, 1.4766, 1.7261]       
         Widths = [0.0023, 0.0041, 0.0032]    
-        coeffs = [0.40, 0.51, -0.28, -1.460, 0.71] ;; Feature 17, 14, 18
+        coeffs = [0.4565, 0.4410, -0.1845, -2.1062, 1.2844] ;; Feature 17, 14, 18
         featurenum = 3
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,feh
 
         ;; [M/H]
         Centers = [1.6158, 1.5172, 1.4836]       
         Widths = [0.0023, 0.0033, 0.0023]    
-        coeffs = [0.38, 0.40, 0.41, .194, -0.76] ;; Feature 17, 16, 15
+        coeffs = [0.4133, 0.2875, 0.2722, -0.0761, -0.4806] ;; Feature 17, 16, 15
         featurenum = 3
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,mh
      end
@@ -352,14 +355,14 @@ PRO am_getmetal,lambda,spec,error,sptnum,band,feh,feh_err,mh,mh_err,doerr=doerr
         ;; [Fe/H]
         Centers = [2.2079, 2.3844, 2.3242]       
         Widths = [0.0068, 0.0035, 0.0038]    
-        coeffs = [0.19, 0.069, 0.083, 0.218, -1.55] ;; Feature 19, 22, 20
+        coeffs = [0.1963, 0.0681, 0.0134, 0.7839, -1.9193]
         featurenum = 3
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,feh
 
         ;; [M/H]
         Centers = [2.2079, 2.3844, 2.3342]       
         Widths = [0.0068, 0.0035, 0.0035]    
-        coeffs = [0.12, 0.086, 0.13, .245, -1.18] ;; Feature 19, 22, 21
+        coeffs = [0.1263, 0.0751, 0.0767, 0.4422, -1.3200] ;; Feature 19, 22, 21
         featurenum = 3
         metalcalc,centers,widths,coeffs,featurenum,lambda,spec,error,te,mh
      end
