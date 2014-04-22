@@ -13,6 +13,7 @@
 ;        we used the M9V template LHS 2065. These templates can be
 ;        found at:
 ;        http://irtfweb.ifa.hawaii.edu/~spex/IRTF_Spectral_Library/
+;        This software can be found at https://github.com/awmann/metal
 ;
 ;        Contact me at amann@astro.as.utexas.edu if you have problems
 ;        or suggested improvments. 
