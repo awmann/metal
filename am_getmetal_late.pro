@@ -145,6 +145,12 @@ PRO getclosecontregion,blambda,bspec,berror,center,newcontinuum
   contflux = spec[contloc]
   conterr = error[contloc]
 
+  goodpoints = where(finite(conterr) ne 1)
+  if goodpoints[0] ne -1 then begin
+     ;; this is bad, it means one or more points has some NaNs or
+     ;; infinities. For now we'll set these to a large number
+     conterr[goodpoints] = contflux*100 ;; this should downweight them!
+  endif
   result = linfit(contlambda,contflux,measure_errors=conterr)
   newcontinuum = lambda*result[1] + result[0]
 
